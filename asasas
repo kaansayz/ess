@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Esiyla İçin Özel Çıkma Teklifi</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Comic Sans MS', sans-serif; overflow-x:hidden; scroll-behavior:smooth; }
+
+/* Bölümler */
+section {
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  font-size:2em;
+  text-align:center;
+  padding: 0 20px;
+  color:white;
+  position:relative;
+  opacity:0;
+  transform: translateY(50px);
+  transition: all 1s ease;
+}
+section.visible { opacity:1; transform:translateY(0); }
+
+#sec1 { background:linear-gradient(135deg,#ff6f61,#ff9a8b);}
+#sec2 { background:linear-gradient(135deg,#6b5b95,#b8a9c9);}
+#sec3 { background:linear-gradient(135deg,#88b04b,#c5e99b);}
+#sec4 { background:linear-gradient(135deg,#f7cac9,#fceade); color:black;}
+#sec5 { background:linear-gradient(135deg,#ffcc5c,#fff1a8); color:black;}
+
+/* Butonlar */
+.btn {
+  padding:15px 30px;
+  font-size:1.2em;
+  cursor:pointer;
+  border:none;
+  border-radius:15px;
+  margin:10px;
+  transition:0.3s;
+  background:#ff6f61;
+  color:white;
+}
+.btn:hover { transform: scale(1.1); background:#ff3b3b; }
+
+/* Emoji animasyonları */
+.emoji { position:absolute; font-size:2em; pointer-events:none; animation: floatUp 1s forwards; }
+@keyframes floatUp {
+  0% { opacity:1; transform:translateY(0) scale(1);}
+  100% { opacity:0; transform:translateY(-120px) scale(1.5);}
+}
+
+/* Shake animasyonu */
+@keyframes shake {
+  0%,100%{transform:translateY(0);}
+  25%{transform:translateY(-10px);}
+  50%{transform:translateY(10px);}
+  75%{transform:translateY(-10px);}
+}
+.shake { animation: shake 0.5s infinite; }
+</style>
+</head>
+<body>
+
+<section id="sec1">
+  Hey Esi! 👋
+</section>
+
+<section id="sec2">
+  Uzun zamandır sana söylemek istediğim bir şey var… 📝<br>
+  Yıllar geçse de, senin gülüşünü, bakışını, konuşmanı unutamadım.  
+  Her şeyin kalbimde çok özel. 💕
+</section>
+
+<section id="sec3">
+  Seninle geçen anlar benim için bir hazine gibi… 😍<br>
+  Bazen gülüşünü düşünürken kendimi kaybediyorum, bazen heyecanlanıyorum…  
+  Her an seni düşündüğüm için şükrediyorum.
+</section>
+
+<section id="sec4">
+  Seninle geleceği hayal ediyorum…  
+  Hayallerimde hep sen varsın. 🌟  
+  Tüm anılarımızı biriktirmek istiyorum. 💖
+</section>
+
+<section id="sec5">
+  Bana çıkmayı kabul eder misin? 💌<br><br>
+  <button class="btn" onclick="celebrate('❤️')">Evet!</button>
+  <button class="btn" onclick="shakeOnly()">Hayır</button>
+</section>
+
+<script>
+// Kaydırma ile görünür yapma
+const sections = document.querySelectorAll('section');
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY + window.innerHeight/1.2;
+  sections.forEach(sec=>{
+    if(sec.offsetTop < scrollY){
+      sec.classList.add('visible');
+    }
+  });
+});
+
+// Evet butonu fonksiyonu
+function celebrate(emoji){
+  for(let i=0;i<50;i++){  
+    const span = document.createElement('span');
+    span.className='emoji';
+    span.innerText=emoji;
+    span.style.left=Math.random()*90+'%';
+    span.style.top=Math.random()*80+'%';
+    span.style.fontSize=(20+Math.random()*30)+'px';
+    document.body.appendChild(span);
+    setTimeout(()=>{ span.remove(); },1500);
+  }
+  alert('Ooo harika! 💕 Seni çok seviyorum Esi! Yıllar geçse de unutamadım seni.');
+}
+
+// Hayır butonu fonksiyonu
+function shakeOnly(){
+  const sec = document.getElementById('sec5');
+  sec.classList.add('shake');
+  setTimeout(()=>{ sec.classList.remove('shake'); },1000);
+  alert('Hmm… belki sonra 😂 Ama yine de seni seviyorum!');
+}
+</script>
+
+</body>
+</html>
